@@ -82,11 +82,11 @@ class graph:
                 nextVerts.append(connector)
 #Sets the key for the next row in the matrix
             nextRow = [vert]
-#Checks if there is an edge linking each vertex, if yes an "x" is printed, otherwise an "-"
+#Checks if there is an edge linking each vertex, if yes an "1" is printed, otherwise an "-"
 #This is the portion of the code that can be edited should we be required to work with weighted lists
             for vertx in verts:
                 if vertx in nextVerts:
-                    nextRow.append("X")
+                    nextRow.append("1")
                 else:
                     nextRow.append("-")
 #Adds the next row to the matrix, to create the 2D array
