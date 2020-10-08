@@ -30,6 +30,29 @@ class graph:
         self.addDirectionalEdge(newEdge)
         self.addDirectionalEdge(newEdge[::-1])
 
+#Procedure used to traverse a tree using iterative depth first traversal
+    def depthFirst(self):
+#Stack used to store all items for depth first traversal
+        stack = []
+        done = []
+#Takes the keys from self.__dict and converts them into a list to be used for traversal
+        verts = self.printVertices()
+        stack.append(verts[0])
+        print("Vertices (Depth First Traversal): ")
+#While the stack is not empty
+        while stack:
+#Take the next item off the stack (next vertex)
+            vert = stack.pop()
+#If the next vertex has not already been printed
+            if vert not in done:
+#The vertex will be added to the done list
+                done.append(vert)
+#The vertex will be printed
+                print(vert)
+#Adds all of the adjacent edges to the vertex to the stack, so that they can be traversed
+                toAdd = self.__dict[vert]
+                for adder in toAdd:
+                    stack.append(adder)
 
 #Function used to return all of the different multi-directional paths available (No reverse instances)
     def printUniqueEdges(self):
@@ -82,13 +105,13 @@ class graph:
                 nextVerts.append(connector)
 #Sets the key for the next row in the matrix
             nextRow = [vert]
-#Checks if there is an edge linking each vertex, if yes an "x" is printed, otherwise an "-"
+#Checks if there is an edge linking each vertex, if yes an "1" is printed, otherwise an "-"
 #This is the portion of the code that can be edited should we be required to work with weighted lists
             for vertx in verts:
                 if vertx in nextVerts:
-                    nextRow.append("X")
+                    nextRow.append("1")
                 else:
-                    nextRow.append("-")
+                    nextRow.append("0")
 #Adds the next row to the matrix, to create the 2D array
             matrix.append(nextRow)
         return matrix
@@ -119,7 +142,7 @@ class graph:
 
     def printVerts(self):
 #All vertices
-        print("\nAll Vertices:")
+        print("\nVertices (Directly Read from Graph):")
         for item in self.printVertices():
             print (item)
 
@@ -148,6 +171,7 @@ graphDict = {"1":["2","3"],
         }
 myGraph = graph(graphDict)
 myGraph.addEdge(["4","2"])
+myGraph.depthFirst()
 myGraph.printEds()
 myGraph.printUnEds()
 myGraph.printVerts()
