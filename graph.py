@@ -30,6 +30,22 @@ class graph:
         self.addDirectionalEdge(newEdge)
         self.addDirectionalEdge(newEdge[::-1])
 
+    def depthFirst(self):
+        stack = []
+        done = []
+        verts = self.printVertices()
+        stack.append(verts[0])
+        print("Vertices (Depth First Traversal): ")
+        while stack:
+            vert = stack.pop()
+            if vert not in done:
+                done.append(vert)
+                print(vert)
+                toAdd = self.__dict[vert]
+                for adder in toAdd:
+                    stack.append(adder)
+
+
 
 #Function used to return all of the different multi-directional paths available (No reverse instances)
     def printUniqueEdges(self):
@@ -88,7 +104,7 @@ class graph:
                 if vertx in nextVerts:
                     nextRow.append("1")
                 else:
-                    nextRow.append("-")
+                    nextRow.append("0")
 #Adds the next row to the matrix, to create the 2D array
             matrix.append(nextRow)
         return matrix
@@ -119,7 +135,7 @@ class graph:
 
     def printVerts(self):
 #All vertices
-        print("\nAll Vertices:")
+        print("\nVertices (Directly Read from Graph):")
         for item in self.printVertices():
             print (item)
 
@@ -148,6 +164,7 @@ graphDict = {"1":["2","3"],
         }
 myGraph = graph(graphDict)
 myGraph.addEdge(["4","2"])
+myGraph.depthFirst()
 myGraph.printEds()
 myGraph.printUnEds()
 myGraph.printVerts()
